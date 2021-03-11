@@ -1,3 +1,4 @@
+import 'package:chat_app/components/custom_button.dart';
 import 'package:chat_app/constants/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +8,9 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  String _email;
+  String _password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,8 +32,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               height: 48.0,
             ),
             TextField(
+              keyboardType: TextInputType.emailAddress,
+              textAlign: TextAlign.center,
               onChanged: (value) {
-                //Do something with the user input.
+                _email = value;
               },
               decoration:
                   kButtonDecoration.copyWith(hintText: "Enter your email"),
@@ -38,8 +44,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               height: 8.0,
             ),
             TextField(
+              obscureText: true,
+              textAlign: TextAlign.center,
               onChanged: (value) {
-                //Do something with the user input.
+                _password = value;
               },
               decoration:
                   kButtonDecoration.copyWith(hintText: "Enter your password"),
@@ -47,24 +55,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             SizedBox(
               height: 24.0,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
-                color: Colors.blueAccent,
-                borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                elevation: 5.0,
-                child: MaterialButton(
-                  onPressed: () {
-                    //Implement registration functionality.
-                  },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: Text(
-                    'Register',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
+            CustomButton(
+              textLabel: 'Register',
+              onPress: () {},
+              buttonColor: Colors.blueAccent,
             ),
           ],
         ),
