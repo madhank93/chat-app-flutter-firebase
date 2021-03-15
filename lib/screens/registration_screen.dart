@@ -1,5 +1,7 @@
 import 'package:chat_app/components/custom_button.dart';
 import 'package:chat_app/constants/styles.dart';
+import 'package:chat_app/screens/chat_screen.dart';
+import 'package:chat_app/services/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -57,7 +59,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             ),
             CustomButton(
               textLabel: 'Register',
-              onPress: () {},
+              onPress: () async {
+                bool isAuthenticated =
+                    await FireBaseAuthService.registerUserWithEmailAndPassword(
+                        _email, _password);
+                if (isAuthenticated) {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return ChatScreen();
+                      },
+                    ),
+                  );
+                }
+              },
               buttonColor: Colors.blueAccent,
             ),
           ],
