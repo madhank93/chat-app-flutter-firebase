@@ -1,3 +1,4 @@
+import 'package:chat_app/services/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/constants/styles.dart';
 
@@ -7,6 +8,12 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  @override
+  void initState() {
+    super.initState();
+    FireBaseAuthService().getSignedInUsers();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

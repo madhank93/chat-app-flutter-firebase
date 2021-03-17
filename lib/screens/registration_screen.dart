@@ -1,6 +1,6 @@
 import 'package:chat_app/components/custom_button.dart';
 import 'package:chat_app/constants/styles.dart';
-import 'package:chat_app/screens/chat_screen.dart';
+import 'package:chat_app/routes/routes.dart';
 import 'package:chat_app/services/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -34,6 +34,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               height: 48.0,
             ),
             TextField(
+              style: kTextColorStyle,
               keyboardType: TextInputType.emailAddress,
               textAlign: TextAlign.center,
               onChanged: (value) {
@@ -46,6 +47,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               height: 8.0,
             ),
             TextField(
+              style: kTextColorStyle,
               obscureText: true,
               textAlign: TextAlign.center,
               onChanged: (value) {
@@ -64,13 +66,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     await FireBaseAuthService.registerUserWithEmailAndPassword(
                         _email, _password);
                 if (isAuthenticated) {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return ChatScreen();
-                      },
-                    ),
-                  );
+                  Navigator.of(context).pushNamed(Routes.chatScreen);
                 }
               },
               buttonColor: Colors.blueAccent,
