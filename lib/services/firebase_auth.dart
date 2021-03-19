@@ -55,7 +55,7 @@ class FireBaseAuthService {
     }
   }
 
-  User? getSignedInUsers() {
+  static User? getSignedInUsers() {
     late User? _user;
     try {
       if (_auth.currentUser != null) {
@@ -70,5 +70,9 @@ class FireBaseAuthService {
         toastLength: Toast.LENGTH_LONG,
       );
     }
+  }
+
+  static Future<void> logout() async {
+    return _auth.signOut();
   }
 }

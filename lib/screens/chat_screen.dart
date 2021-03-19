@@ -11,7 +11,6 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
-    FireBaseAuthService().getSignedInUsers();
   }
 
   @override
@@ -21,9 +20,10 @@ class _ChatScreenState extends State<ChatScreen> {
         leading: null,
         actions: <Widget>[
           IconButton(
-              icon: Icon(Icons.close),
+              icon: Icon(Icons.logout),
               onPressed: () {
-                //Implement logout functionality
+                FireBaseAuthService.logout();
+                Navigator.of(context).pop();
               }),
         ],
         title: Text('⚡️Chat'),
