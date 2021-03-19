@@ -7,16 +7,10 @@ class FireBaseAuthService {
 
   static Future<bool> registerUserWithEmailAndPassword(
       String email, String password) async {
-    bool isAuthenticated = false;
-    UserCredential user;
-
     try {
-      user = await _auth.createUserWithEmailAndPassword(
+      await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      if (user != null) {
-        isAuthenticated = true;
-      }
-      return isAuthenticated;
+      return true;
     } catch (error) {
       Fluttertoast.showToast(
         msg: error.toString(),
@@ -24,18 +18,14 @@ class FireBaseAuthService {
         textColor: Colors.white,
         toastLength: Toast.LENGTH_LONG,
       );
-      return isAuthenticated;
+      return false;
     }
   }
 
   static Future<bool> loginWithEmailAndPassword(
       String email, String password) async {
-    bool isAuthenticated = false;
-    UserCredential user;
     try {
-      user = await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
-      if (user != null) {}
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
       return true;
     } on FirebaseAuthException catch (error) {
       if (error.code == 'invalid-email' || error.code == 'wrong-password') {
@@ -65,9 +55,13 @@ class FireBaseAuthService {
     }
   }
 
-  User getSignedInUsers() {
+  User? getSignedInUsers() {
+    late User? _user;
     try {
-      User _user = _auth.currentUser;
+      if (_auth.currentUser != null) {
+        _user = _auth.currentUser;
+        return _user;
+      }
     } catch (error) {
       Fluttertoast.showToast(
         msg: error.toString(),

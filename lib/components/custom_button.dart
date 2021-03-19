@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   final String textLabel;
-  final Function onPress;
+  final VoidCallback onPress;
   final Color buttonColor;
 
-  CustomButton(
-      {@required this.textLabel,
-      @required this.onPress,
-      @required this.buttonColor});
+  CustomButton({
+    required this.textLabel,
+    required this.onPress,
+    required this.buttonColor,
+  });
 
   @override
   Widget build(BuildContext context) {

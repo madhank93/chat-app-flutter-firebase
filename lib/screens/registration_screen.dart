@@ -10,8 +10,8 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  String _email;
-  String _password;
+  late String _email;
+  late String _password;
 
   @override
   Widget build(BuildContext context) {

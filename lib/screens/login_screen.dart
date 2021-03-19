@@ -10,8 +10,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String _email;
-  String _password;
+  late String _email;
+  late String _password;
 
   @override
   Widget build(BuildContext context) {
