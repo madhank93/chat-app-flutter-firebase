@@ -1,4 +1,5 @@
 import 'package:chat_app/components/custom_button.dart';
+import 'package:chat_app/components/spinner.dart';
 import 'package:chat_app/constants/styles.dart';
 import 'package:chat_app/routes/routes.dart';
 import 'package:chat_app/services/firebase_auth.dart';
@@ -65,9 +66,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   CustomButton(
                     textLabel: 'Register',
                     onPress: () async {
+                      Loader.onLoading(context);
                       bool isAuthenticated = await FireBaseAuthService
                           .registerUserWithEmailAndPassword(_email, _password);
                       if (isAuthenticated) {
+                        Navigator.pop(context);
                         Navigator.of(context).pushNamed(Routes.chatScreen);
                       }
                     },
