@@ -1,5 +1,5 @@
 import 'package:chat_app/components/custom_button.dart';
-import 'package:chat_app/components/spinner.dart';
+import 'package:chat_app/components/loader.dart';
 import 'package:chat_app/constants/styles.dart';
 import 'package:chat_app/routes/routes.dart';
 import 'package:chat_app/services/firebase_auth.dart';
