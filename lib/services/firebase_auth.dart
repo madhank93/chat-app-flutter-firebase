@@ -56,10 +56,10 @@ class FireBaseAuthService {
   }
 
   static User? getSignedInUsers() {
-    late User? _user;
+    late User _user;
     try {
       if (_auth.currentUser != null) {
-        _user = _auth.currentUser;
+        _user = _auth.currentUser!;
         return _user;
       }
     } catch (error) {
