@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'chat_message.g.dart';
+part 'message.g.dart';
 
 @JsonSerializable()
-class ChatMessage {
+class Message {
   @JsonKey(name: "uuid", defaultValue: "")
   final String uuid;
 
@@ -13,11 +13,11 @@ class ChatMessage {
   @JsonKey(name: "message", defaultValue: "")
   final String message;
 
-  ChatMessage(
+  Message(
       {required this.uuid, required this.senderName, required this.message});
 
-  factory ChatMessage.fromJson(Map<String, dynamic> data) =>
-      _$ChatMessageFromJson(data);
+  factory Message.fromJson(Map<String, dynamic> data) =>
+      _$MessageFromJson(data);
 
-  Map<String, dynamic> toJson() => _$ChatMessageToJson(this);
+  Map<String, dynamic> toJson() => _$MessageToJson(this);
 }

@@ -1,21 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'chat_message.dart';
+part of 'message.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ChatMessage _$ChatMessageFromJson(Map<String, dynamic> json) {
-  return ChatMessage(
+Message _$MessageFromJson(Map<String, dynamic> json) {
+  return Message(
     uuid: json['uuid'] as String? ?? '',
     senderName: json['sender_name'] as String? ?? '',
     message: json['message'] as String? ?? '',
   );
 }
 
-Map<String, dynamic> _$ChatMessageToJson(ChatMessage instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$MessageToJson(Message instance) => <String, dynamic>{
       'uuid': instance.uuid,
       'sender_name': instance.senderName,
       'message': instance.message,

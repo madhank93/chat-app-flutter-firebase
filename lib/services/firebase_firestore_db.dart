@@ -15,7 +15,8 @@ class FireBaseFireStoreDB {
   }
 
   add(Map<String, dynamic> data) {
-    data['uuid'] = getID();
-    getCollectionReference().doc(getID()).set(data);
+    String id = getID();
+    data['uuid'] = id;
+    getCollectionReference().doc(id).set(data);
   }
 }

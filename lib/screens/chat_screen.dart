@@ -1,5 +1,5 @@
-import 'package:chat_app/db/send_message.dart';
-import 'package:chat_app/models/chat_message.dart';
+import 'package:chat_app/db/chat_message.dart';
+import 'package:chat_app/models/message.dart';
 import 'package:chat_app/services/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -71,8 +71,8 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void _sendChatMessage() {
-    ChatMessage msg = ChatMessage(
-        message: _messgae, senderName: _signedInUsers.email!, uuid: "");
-    SendMessage().add(msg.toJson());
+    Message msg =
+        Message(message: _messgae, senderName: _signedInUsers.email!, uuid: "");
+    ChatMessage().add(msg.toJson());
   }
 }
