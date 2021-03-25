@@ -11,4 +11,8 @@ class ChatMessage extends FireBaseFireStoreDB {
   String getID() {
     return getCollectionReference().doc().id;
   }
+
+  Stream<QuerySnapshot> getStreamOfMessages() {
+    return getCollectionReference().orderBy('message').snapshots();
+  }
 }
