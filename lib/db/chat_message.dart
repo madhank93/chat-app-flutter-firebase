@@ -13,6 +13,6 @@ class ChatMessage extends FireBaseFireStoreDB {
   }
 
   Stream<QuerySnapshot> getStreamOfMessages() {
-    return getCollectionReference().orderBy('message').snapshots();
+    return getCollectionReference().orderBy('createdAt').snapshots();
   }
 }

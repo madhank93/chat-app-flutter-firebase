@@ -17,6 +17,7 @@ class FireBaseFireStoreDB {
   add(Map<String, dynamic> data) {
     String id = getID();
     data['uuid'] = id;
+    data['createdAt'] = FieldValue.serverTimestamp();
     getCollectionReference().doc(id).set(data);
   }
 }
