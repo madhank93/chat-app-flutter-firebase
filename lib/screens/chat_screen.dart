@@ -44,56 +44,7 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            StreamBuilder(
-                stream: _messages,
-                builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                  late Widget children;
-                  if (snapshot.hasError) {
-                    children = Center(child: Text("Failed to load"));
-                  } else if (snapshot.connectionState ==
-                      ConnectionState.waiting) {
-                    children = Center(
-                      child: CircularProgressIndicator(
-                        backgroundColor: Colors.lightBlueAccent,
-                      ),
-                    );
-                  } else if (snapshot.hasData) {
-                    children = Expanded(
-                      child: ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: snapshot.data!.size,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.blue,
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(10),
-                                    ),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      snapshot.data!.docs[index]['message'],
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    );
-                  }
-                  return children;
-                }),
+            MessageStream(messages: _messages),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
@@ -127,5 +78,71 @@ class _ChatScreenState extends State<ChatScreen> {
     Message msg =
         Message(message: _messgae, senderName: _signedInUsers.email!, uuid: "");
     ChatMessage().add(msg.toJson());
+  }
+}
+
+class MessageStream extends StatelessWidget {
+  const MessageStream({
+    Key? key,
+    required Stream<QuerySnapshot> messages,
+  })   : _messages = messages,
+        super(key: key);
+
+  final Stream<QuerySnapshot> _messages;
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+        stream: _messages,
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          late Widget children;
+          if (snapshot.hasError) {
+            children = Center(child: Text("Failed to load"));
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
+            children = Center(
+              child: CircularProgressIndicator(
+                backgroundColor: Colors.lightBlueAccent,
+              ),
+            );
+          } else if (snapshot.hasData) {
+            children = Expanded(
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: snapshot.data!.size,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Card(
+                          elevation: 10,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                snapshot.data!.docs[index]['message'],
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                },
+              ),
+            );
+          }
+          return children;
+        });
   }
 }
